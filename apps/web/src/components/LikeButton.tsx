@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { likeArtwork, unlikeArtwork } from '@abstract/shared';
 import { createClient } from '@/lib/supabase/client';
@@ -19,7 +19,7 @@ export function LikeButton({
   const router = useRouter();
   const [liked, setLiked] = useState(initialLiked);
   const [count, setCount] = useState(initialCount);
-  const [pending, startTransition] = useTransition();
+  const [pending, setPending] = useState(false);
 
   async function toggle() {
     if (!userId) {
@@ -31,16 +31,17 @@ export function LikeButton({
     // Optimistic update
     setLiked(next);
     setCount((c) => c + (next ? 1 : -1));
-    startTransition(async () => {
-      try {
-        if (next) await likeArtwork(supabase, artworkId, userId);
-        else await unlikeArtwork(supabase, artworkId, userId);
-      } catch {
-        // Roll back on failure
-        setLiked(!next);
-        setCount((c) => c + (next ? -1 : 1));
-      }
-    });
+    setPending(true);
+    try {
+      if (next) await likeArtwork(supabase, artworkId, userId);
+      else await unlikeArtwork(supabase, artworkId, userId);
+    } catch {
+      // Roll back on failure
+      setLiked(!next);
+      setCount((c) => c + (next ? -1 : 1));
+    } finally {
+      setPending(false);
+    }
   }
 
   return (
