@@ -38,3 +38,6 @@ supabase/.temp
 
 # large source asset (30MB original; the optimized apps/web/public/media/hero.mp4 is used instead)
 videos/
+
+# Claude Code machine-local settings (personal, not shared)
+.claude/settings.local.json
