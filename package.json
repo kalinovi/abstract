@@ -1,0 +1,28 @@
+{
+  "name": "abstract",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Abstract — online art gallery & community. Monorepo: Next.js web + Expo mobile + Supabase backend.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "web": "npm run dev --workspace @abstract/web",
+    "mobile": "npm run start --workspace @abstract/mobile",
+    "build:web": "npm run build --workspace @abstract/web",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "db:reset": "supabase db reset",
+    "db:push": "supabase db push",
+    "gen:types": "supabase gen types typescript --local > packages/shared/src/database.types.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "overrides": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "license": "MIT"
+}

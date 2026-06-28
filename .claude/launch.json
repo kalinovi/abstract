@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web (Next.js)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--workspace", "@abstract/web"],
+      "port": 3000
+    },
+    {
+      "name": "mobile (Expo)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start", "--workspace", "@abstract/mobile"],
+      "port": 8081
+    }
+  ]
+}

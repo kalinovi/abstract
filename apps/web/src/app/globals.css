@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-ink-950 text-zinc-100 antialiased;
+}
+
+/* Thin accent scrollbar to match the dark gallery aesthetic */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-ink-700 rounded-full;
+}
+::-webkit-scrollbar-track {
+  @apply bg-ink-950;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5
+           text-sm font-semibold transition focus:outline-none focus:ring-2
+           focus:ring-accent/60 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-soft;
+  }
+  .btn-ghost {
+    @apply btn border border-white/15 text-zinc-100 hover:bg-white/10;
+  }
+  .field {
+    @apply w-full rounded-xl border border-white/10 bg-ink-800 px-4 py-3 text-sm
+           text-zinc-100 placeholder:text-zinc-500
+           focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent;
+  }
+  .card {
+    @apply rounded-2xl border border-white/10 bg-ink-900;
+  }
+}
